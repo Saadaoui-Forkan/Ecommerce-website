@@ -1,0 +1,21 @@
+-create folder
+-open new terminal
+-git init
+-git clone
+-don't forget cd file direction
+-git status
+-git add .
+-git commit -m "message"
+-git push origin main
+
+
+
+
+*********
+enter folder
+git pull: update the folder
+-git status
+-git add .
+-git commit -m "message"
+-git push origin main
+
