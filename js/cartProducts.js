@@ -22,3 +22,8 @@ function drawProductsInCart() {
     productsInCartUI.innerHTML = cartProductsUI
 }
 drawProductsInCart()
+
+// remove item
+(function removeItems() {
+    console.log("hello");
+})();
