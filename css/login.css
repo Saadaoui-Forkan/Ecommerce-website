@@ -1,0 +1,11 @@
+p.message {
+    margin-bottom: 20px;
+    font-family: 'Roboto';
+    font-size: 13px;
+    color: #181818;
+}
+.message a {
+    font-weight: bold;
+    text-decoration: none;
+    color: #8758FF;
+}
