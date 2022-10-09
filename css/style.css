@@ -182,3 +182,24 @@ i.fa-solid.fa-heart {
     color: #a8a6a6;
     cursor: pointer;
 }
+
+/* section filtering data */
+.filtering-products form {
+    margin-top: 50px;
+    margin-left: 20px;
+}
+.filtering-products input {
+    width: 60%;
+    padding: 7px;
+    border: 1px solid #8758FF;
+    border-radius: 5px;
+    color: #181818;
+    font-family: 'Roboto', sans-serif;
+}
+.filtering-products input:focus{
+    outline: none;
+}
+.filtering-products input::placeholder{
+    color: #181818;
+    font-family: 'Roboto', sans-serif;
+}
