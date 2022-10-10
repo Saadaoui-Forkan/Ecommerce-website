@@ -188,7 +188,7 @@ i.fa-solid.fa-heart {
     margin-top: 50px;
     margin-left: 20px;
 }
-.filtering-products input {
+.search-product {
     width: 60%;
     padding: 7px;
     border: 1px solid #8758FF;
@@ -196,10 +196,10 @@ i.fa-solid.fa-heart {
     color: #181818;
     font-family: 'Roboto', sans-serif;
 }
-.filtering-products input:focus{
+.search-product:focus{
     outline: none;
 }
-.filtering-products input::placeholder{
+.search-product::placeholder{
     color: #181818;
     font-family: 'Roboto', sans-serif;
 }

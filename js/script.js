@@ -104,15 +104,15 @@ let products = [
 const sectionOne = document.querySelector('.section-1')
 const productContainer = document.querySelector('.product-container')
 
-function drawProductsUI() {
-    let productsUI = products.map((product)=>{
+function drawProductsUI(allProducts =[]) {
+    let productsUI = allProducts.map((product)=>{
         return `
         <div class="product-container">
             <div class="product-img">
                 <img src='${product.img_url}.png' alt="" srcset="">
             </div>
             <div class="product-info">
-                <h2 class="product-title">${product.title}</h2>
+                <h2 class="product-title" data-title="${product.title}">${product.title}</h2>
                 <h3 class="product-description">${product.des}</h3>
                 <h2 class="product-price">${product.price} DT</h2>
             </div>
@@ -125,7 +125,7 @@ function drawProductsUI() {
     })
     sectionOne.innerHTML = productsUI
 }
-drawProductsUI()
+drawProductsUI(products)
 
 const addToCart = document.querySelectorAll(".add-to-cart")
 const shoppingCart = document.querySelector(".shopping-cart")
@@ -178,8 +178,17 @@ function openCartMenu() {
 }
 shoppingCart.addEventListener('click', openCartMenu)
 
+// search product
+let searchProduct = document.querySelector(".filtering-products form")
+searchProduct.addEventListener('input', function(){
+    search()
+})
 
-
-
+function search(){
+    let inp = document.querySelector('.search-product')
+    let input = inp.value.toUpperCase()
+    let filteredProducts = products.filter(prod => prod.title.toUpperCase().indexOf(input) !== -1)
+    drawProductsUI(filteredProducts)
+}
 
 
