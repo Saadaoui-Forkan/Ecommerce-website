@@ -3,100 +3,114 @@ let products = [
     {
         id:1,
         img_url:'./images/hp-1',
-        title:'Hp',
+        title:'Hp one',
         des:'screen 15.6" FHD - processor Intel i7-1065G7',
-        price:'900'
+        price:'900',
+        qty:1
     },
     {
         id:2,
         img_url:'./images/dell-3',
-        title:'Dell',
-        des:'screen 15.6" FHD - processor Intel i7-1065G7',
-        price:'1000'
+        title:'Dell one',
+        des:'screen 15.6" FHD - processor Intel i7-1165G7',
+        price:'1000',
+        qty:1
     },
     {
         id:3,
         img_url:'./images/dell-2',
-        title:'Dell',
+        title:'Dell two',
         des:'screen 15.6" FHD - processor Intel i7-1065G7 ',
-        price:'800'
+        price:'800',
+        qty:1
     },
     {
         id:4,
         img_url:'./images/dell-1',
-        title:'Dell',
+        title:'Dell three',
         des:'screen 15.6" FHD - processor Intel i7-1065G7',
-        price:'900'
+        price:'900',
+        qty:1
     },
     {
         id:5,
         img_url:'./images/asus-1',
-        title:'Asus',
+        title:'Asus one',
         des:'screen 15.6" FHD - processor Intel i7-1065G7',
-        price:'700'
+        price:'700',
+        qty:1
     },
     {
         id:6,
         img_url:'./images/asus-3',
-        title:'Asus',
+        title:'Asus two',
         des:'screen 15.6" FHD - processor Intel i7-1065G7',
-        price:'850'
+        price:'850',
+        qty:1
     },
     {
         id:7,
         img_url:'./images/hp-2',
-        title:'Hp',
+        title:'Hp two',
         des:'screen 15.6" FHD - processor Intel i7-1065G7',
-        price:'700'
+        price:'700',
+        qty:1
     },
     {
         id:8,
         img_url:'./images/hp-3',
-        title:'Hp',
+        title:'Hp three',
         des:'screen 15.6" FHD - processor Intel i7-1065G7',
-        price:'700'
+        price:'700',
+        qty:1
     },
     {
         id:9,
         img_url:'./images/lenovo-1',
-        title:'Lenovo',
+        title:'Lenovo one',
         des:'screen 15.6" FHD - processor Intel i7-1065G7',
-        price:'700'
+        price:'700',
+        qty:1
     },
     {
         id:10,
         img_url:'./images/lenovo-2',
-        title:'Lenovo',
+        title:'Lenovo two',
         des:'screen 15.6" FHD - processor Intel i7-1065G7',
-        price:'700'
+        price:'700',
+        qty:1
     },
     {
         id:11,
         img_url:'./images/lenovo-3',
-        title:'Lenovo',
+        title:'Lenovo three',
         des:'screen 15.6" FHD - processor Intel i7-1065G7',
-        price:'700'
+        price:'700',
+        qty:1
     },
     {
         id:12,
         img_url:'./images/toshiba-1',
-        title:'Toshiba',
+        title:'Toshiba one',
         des:'screen 15.6" FHD - processor Intel i7-1065G7',
-        price:'700'
+        price:'700',
+        qty:1
     },
     {
         id:13,
         img_url:'./images/toshiba-2',
-        title:'Toshiba',
+        title:'Toshiba two',
         des:'screen 15.6" FHD - processor Intel i7-1065G7',
-        price:'700'
+        price:'700',
+        qty:1
     },
     {
         id:14,
         img_url:'./images/toshiba-3',
-        title:'Toshiba',
+        title:'Toshiba three',
         des:'screen 15.6" FHD - processor Intel i7-1065G7',
-        price:'700'
+        price:'700',
+        qty:1
     }
 ]
 
@@ -140,7 +154,7 @@ let addedItem = localStorage.getItem('productsInCart')
 if (addedItem) {
     addedItem.map((item)=>{
         cartItemsDiv.innerHTML += `
-                    <p>${item.title}</p>         
+                    <p>${item.title} -- ${item.qty}</p>         
                 `
     })
     badge.style.display = "block"
@@ -148,15 +162,29 @@ if (addedItem) {
 } 
 
 // add products to shopping cart icon and save data in localStorage
+let allItems = []
 function addedToCart() {
     addToCart.forEach((item,i)=>{
         item.addEventListener('click', ()=>{
             if (localStorage.getItem ("register-username")) {
-                cartItemsDiv.innerHTML += `
-                    <p>${products[i].title}</p>         
-                `
+
+                let items = allItems.find(item => item.id === products[i].id)
+                if(items){
+                    products[i].qty += 1
+                } else{
+                    allItems.push(products[i])
+                }
+                
+                cartItemsDiv.innerHTML = ""
+                allItems.forEach((prod)=>{
+                    cartItemsDiv.innerHTML += `<p>${prod.title}--<span>${prod.qty}</span></p>`
+                })
+                
+                
                 addedItem = [...addedItem,products[i]]
-                localStorage.setItem('productsInCart',JSON.stringify(addedItem)) 
+
+                let uniqueProducts = getUniqueArr(addedItem,"id")
+                localStorage.setItem('productsInCart',JSON.stringify(uniqueProducts)) 
 
                 const cartItemsLength = document.querySelectorAll('.cart-items-div p')
                 badge.style.display = "block"
@@ -169,6 +197,16 @@ function addedToCart() {
     })
 }
 addedToCart()
+
+function getUniqueArr(myArr,filterType) {
+    let unique = myArr
+    .map(prod => prod[filterType])
+    .map((item,i,arr) => arr.indexOf(item) === i && i)
+    .filter(prod => myArr[prod])
+    .map(item => myArr[item])
+
+    return unique    
+}
 
 // view products in cart menu
 function openCartMenu() {

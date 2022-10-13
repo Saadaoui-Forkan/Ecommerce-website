@@ -12,6 +12,7 @@ function init() {
             <div class="product-info">
                 <h2 class="product-title">${product.title}</h2>
                 <h3 class="product-description">${product.des}</h3>
+                <h3 class="product-description">Quantity:${product.qty}</h3>
                 <h2 class="product-price">${product.price} DT</h2>
             </div>
             <div class="product-btns">

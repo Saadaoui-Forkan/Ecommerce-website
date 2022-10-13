@@ -203,3 +203,9 @@ i.fa-solid.fa-heart {
     color: #181818;
     font-family: 'Roboto', sans-serif;
 }
+.product-in-cart{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    
+}
