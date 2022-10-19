@@ -132,12 +132,12 @@ function drawProductsUI(allProducts =[]) {
             </div>
             <div class="product-btns">
                 <button class="add-to-cart">Add To Cart</button>
-                <i class="fa-solid fa-heart"></i>
+                <i class="fa-solid fa-heart like-btn" data-like="false"></i>
             </div>
         </div>
         `
     })
-    sectionOne.innerHTML = productsUI
+    sectionOne.innerHTML = productsUI.join("")
 }
 drawProductsUI(products)
 
@@ -154,7 +154,7 @@ let addedItem = localStorage.getItem('productsInCart')
 if (addedItem) {
     addedItem.map((item)=>{
         cartItemsDiv.innerHTML += `
-                    <p>${item.title} -- ${item.qty}</p>         
+                    <p>${item.title} -- <span class="num">${item.qty}</span></p>         
                 `
     })
     badge.style.display = "block"
@@ -177,7 +177,7 @@ function addedToCart() {
                 
                 cartItemsDiv.innerHTML = ""
                 allItems.forEach((prod)=>{
-                    cartItemsDiv.innerHTML += `<p>${prod.title}--<span>${prod.qty}</span></p>`
+                    cartItemsDiv.innerHTML += `<p>${prod.title}--<span class="num">${prod.qty}</span></p>`
                 })
                 
                 
@@ -229,4 +229,44 @@ function search(){
     drawProductsUI(filteredProducts)
 }
 
+// favorite products
+const likesBtn = document.querySelectorAll('.like-btn')
+const likesNumber = document.querySelector('.likes')
+
+// check if there is favorite products in localStorage
+let favoriteItems = localStorage.getItem('favoriteProducts') 
+                ? JSON.parse(localStorage.getItem('favoriteProducts')) 
+                : []
+
+if (favoriteItems) {
+    likesNumber.innerHTML = favoriteItems.length
+}
+
+
+
+
+
+likesBtn.forEach((likeBtn,i) =>{
+    likeBtn.addEventListener('click', ()=>{
+        if(localStorage.getItem("register-username")){
+            // styling the fa-heart icon
+            likeBtn.style.color = "red"
+
+            // getting favorite products
+            favoriteItems = [...favoriteItems,products[i]]
+
+            // remove repeated favorite products 
+            let favoriteProducts = getUniqueArr(favoriteItems,"id")
+
+            // getting the number of likes
+            likesNumber.innerHTML = favoriteProducts.length
+
+            // saving data in localStorage
+            localStorage.setItem('favoriteProducts',JSON.stringify(favoriteProducts))
+            
+        }else{
+            window.location = "../html/login.html"
+        }
+    })
+})
 

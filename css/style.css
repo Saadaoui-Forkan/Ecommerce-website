@@ -182,6 +182,9 @@ i.fa-solid.fa-heart {
     color: #a8a6a6;
     cursor: pointer;
 }
+.like-product{
+    color: red;
+}
 
 /* section filtering data */
 .filtering-products form {
@@ -207,5 +210,36 @@ i.fa-solid.fa-heart {
     display: flex;
     align-items: center;
     justify-content: space-around;
-    
+}
+span.num {
+    background-color: blue;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    color: white;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+/* styling favorite products */
+.favorite-products{
+    position: relative;
+}
+i.fa-regular.fa-heart {
+    font-size: 17px;
+    color: rgb(246, 53, 53);
+    margin-left: 20px;
+}
+span.likes {
+    width: 17px;
+    height: 17px;
+    border-radius: 50%;
+    background-color: rgb(246, 53, 53);
+    position: absolute;
+    line-height: 17px;
+    text-align: center;
+    color: #F2F2F2;
+    font-size: 10px;
+    top: -5px;
+    right: -12px;
 }

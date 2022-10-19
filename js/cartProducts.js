@@ -20,7 +20,7 @@ function init() {
             </div>
         </div>
         `;
-    });
+    }).join("");
 
     // remove products from cart
     document.querySelectorAll(".remove-to-cart").forEach((item) => {
