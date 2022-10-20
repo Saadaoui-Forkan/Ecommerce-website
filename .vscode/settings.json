@@ -3,5 +3,6 @@
         "btns",
         "Loged",
         "Processeur"
-    ]
+    ],
+    "liveServer.settings.port": 5501
 }

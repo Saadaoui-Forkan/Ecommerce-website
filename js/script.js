@@ -242,10 +242,6 @@ if (favoriteItems) {
     likesNumber.innerHTML = favoriteItems.length
 }
 
-
-
-
-
 likesBtn.forEach((likeBtn,i) =>{
     likeBtn.addEventListener('click', ()=>{
         if(localStorage.getItem("register-username")){
@@ -270,3 +266,30 @@ likesBtn.forEach((likeBtn,i) =>{
     })
 })
 
+// show my favorite products
+const favorites = document.querySelector(".favorite-products")
+favorites.addEventListener('click', ()=>{
+    // create a popup
+    let overly = document.createElement('div')
+    overly.setAttribute("class", "popup-overly")
+    document.body.appendChild(overly)
+
+    //  styling and draw the popup-overly
+    let favoriteWrapper = document.createElement('div')
+    favoriteWrapper.setAttribute("class", "favorite-wrapper")
+    overly.appendChild(favoriteWrapper)
+    let drawFavoriteProducts = favoriteItems.map(favItem => {
+        // console.log(favItem);
+        return `
+            <i class="fa-sharp fa-solid fa-circle-xmark"></i>
+            <div class="favorite-card">   
+                <p>Dislike<i class="fa-regular fa-thumbs-down"></i></p>
+                
+                <img src="${favItem.img_url}.png" alt="" srcset="">
+                
+                <h2 class="favorite-title">${favItem.title}</h2>
+            </div>
+        `
+    })
+    favoriteWrapper.innerHTML = drawFavoriteProducts.join("")
+})
