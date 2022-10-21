@@ -5,22 +5,40 @@ function init() {
     // display products
     productsInCartUI.innerHTML = products.map((product) => {
         return `
-        <div class="product-container">
-            <div class="product-img">
-            <img src='${product.img_url}.png' alt="" srcset="">
+        
+            <div class="products-wrapper">
+                <div class="img">
+                    <img src='${product.img_url}.png' alt="">
+                </div>
+                <div class="product-details">
+                    <h2>${product.title}</h2>
+                    <h2>${product.price}</h2>
+                </div>
+                <div class="quantity">
+                    <i class="fa-sharp fa-solid fa-square-plus"></i>
+                    <h3>${product.qty}</h3>
+                    <i class="fa-sharp fa-solid fa-square-minus"></i>
+                </div>
+                <div class="total">
+                    <h2>$111</h2>
+                </div>
+                <div >
+                    <button class="remove-to-cart" data-click="${product.id}">Remove</button>
+                </div>
+                
             </div>
-            <div class="product-info">
-                <h2 class="product-title">${product.title}</h2>
-                <h3 class="product-description">${product.des}</h3>
-                <h3 class="product-description">Quantity:${product.qty}</h3>
-                <h2 class="product-price">${product.price} DT</h2>
-            </div>
-            <div class="product-btns">
-                <button class="remove-to-cart" data-click="${product.id}">Remove Product</button>
-            </div>
-        </div>
+            
+        
         `;
     }).join("");
+
+    let bar = document.createElement('div')
+    bar.setAttribute("class", "bar")
+    productsInCartUI.appendChild(bar)
+
+    let globalPrice = document.createElement('h2')
+    globalPrice.setAttribute("class","global-price")
+    productsInCartUI.appendChild(globalPrice)
 
     // remove products from cart
     document.querySelectorAll(".remove-to-cart").forEach((item) => {

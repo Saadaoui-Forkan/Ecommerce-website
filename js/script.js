@@ -132,9 +132,10 @@ function drawProductsUI(allProducts =[]) {
             </div>
             <div class="product-btns">
                 <button class="add-to-cart">Add To Cart</button>
-                <i class="fa-solid fa-heart like-btn" data-like="false"></i>
+                <p class="add-to-favorite">Like<i class="fa-regular fa-thumbs-up"></i></p>
             </div>
         </div>
+        
         `
     })
     sectionOne.innerHTML = productsUI.join("")
@@ -154,7 +155,7 @@ let addedItem = localStorage.getItem('productsInCart')
 if (addedItem) {
     addedItem.map((item)=>{
         cartItemsDiv.innerHTML += `
-                    <p>${item.title} -- <span class="num">${item.qty}</span></p>         
+                    <p>${item.title} </p>         
                 `
     })
     badge.style.display = "block"
@@ -177,7 +178,7 @@ function addedToCart() {
                 
                 cartItemsDiv.innerHTML = ""
                 allItems.forEach((prod)=>{
-                    cartItemsDiv.innerHTML += `<p>${prod.title}--<span class="num">${prod.qty}</span></p>`
+                    cartItemsDiv.innerHTML += `<p>${prod.title}>${prod.qty}</span></p>`
                 })
                 
                 
@@ -230,7 +231,7 @@ function search(){
 }
 
 // favorite products
-const likesBtn = document.querySelectorAll('.like-btn')
+const likesBtn = document.querySelectorAll('.add-to-favorite')
 const likesNumber = document.querySelector('.likes')
 
 // check if there is favorite products in localStorage
@@ -245,8 +246,6 @@ if (favoriteItems) {
 likesBtn.forEach((likeBtn,i) =>{
     likeBtn.addEventListener('click', ()=>{
         if(localStorage.getItem("register-username")){
-            // styling the fa-heart icon
-            likeBtn.style.color = "red"
 
             // getting favorite products
             favoriteItems = [...favoriteItems,products[i]]
@@ -280,23 +279,39 @@ favorites.addEventListener('click', ()=>{
         let favoriteWrapper = document.createElement('div')
         favoriteWrapper.setAttribute("class", "favorite-wrapper")
         overlay.appendChild(favoriteWrapper)
-        let drawFavoriteProducts = favoriteItems.map(favItem => {
-            // console.log(favItem);
-            return `
-                <i class="fa-sharp fa-solid fa-circle-xmark closeBtn"></i>
-                <div class="favorite-card">   
-                    <p>Dislike<i class="fa-regular fa-thumbs-down"></i></p>
-                    
-                    <img src="${favItem.img_url}.png" alt="" srcset="">
-                    
-                    <h2 class="favorite-title">${favItem.title}</h2>
-                </div>
-            `
+
+        function drawFavoriteProducts(favorites) {
+            let drawFavoriteProducts = favorites.map(favItem => {
+                // console.log(favItem);
+                return `
+                    <i class="fa-sharp fa-solid fa-circle-xmark closeBtn"></i>
+                    <div class="favorite-card">   
+                        <p class="dislike" data-click="${favItem.id}">
+                            Dislike
+                            <i class="fa-regular fa-thumbs-down"></i>
+                        </p>
+                        <img src="${favItem.img_url}.png" alt="" srcset="">
+                        
+                        <h2 class="favorite-title">${favItem.title}</h2>
+                    </div>
+                `
+            })
+            favoriteWrapper.innerHTML = drawFavoriteProducts.join("")
+        }
+        drawFavoriteProducts(favoriteItems)
+
+        // remove disliked products
+        let disliked = document.querySelectorAll('.dislike')
+        disliked.forEach(item =>{
+            let dislikeId = item.getAttribute("data-click")
+            item.addEventListener('click', ()=>{
+                favoriteItems = favoriteItems.filter((data) => data.id != dislikeId)
+                localStorage.setItem("favoriteProducts", JSON.stringify(favoriteItems))
+                drawFavoriteProducts(favoriteItems)
+            })
         })
-        favoriteWrapper.innerHTML = drawFavoriteProducts.join("")
     }
 })
-
 // close popup
 document.addEventListener('click', function(e){
     // console.log(e.target.className == "fa-sharp fa-solid fa-circle-xmark closeBtn");
