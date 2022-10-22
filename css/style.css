@@ -281,10 +281,9 @@ span.likes {
     background-color: #fff;
 
 }
-.favorite-card{
-    width: 100px;
-    height: 120px;
-    margin: 8px;
+.favorite-card {
+    width: 150px;
+    margin: 10px;
     position: relative;
     box-shadow: 0px 0px 13px 4px #e0e0e0;
 }
@@ -302,23 +301,23 @@ span.likes {
     border: 1px solid #8758FF;
     padding: 2px;
     color: #8758FF;
-    font-size: 7px;
+    font-size: 10px;
     font-weight: bold;
     font-family: 'Nunito', sans-serif;
+    cursor: pointer;
 }
 .favorite-card p i{
     margin-left: 2px;
 }
 .favorite-title {
     position: absolute;
-    bottom: 4px;
+    bottom: 2px;
     left: 50%;
     transform: translateX(-50%);
     color: #8758FF;
-    font-size: 8px;
+    font-size: 12px;
     font-family: 'Roboto', sans-serif;
     text-align: center;
-    margin-top: -10px;
 }
 i.fa-sharp.fa-solid.fa-circle-xmark {
     font-size: 25px;

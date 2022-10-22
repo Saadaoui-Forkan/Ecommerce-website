@@ -153,11 +153,11 @@ let addedItem = localStorage.getItem('productsInCart')
                 ? JSON.parse(localStorage.getItem('productsInCart')) 
                 : []
 if (addedItem) {
-    addedItem.map((item)=>{
-        cartItemsDiv.innerHTML += `
-                    <p>${item.title} </p>         
-                `
-    })
+    // addedItem.map((item)=>{
+    //     cartItemsDiv.innerHTML += `
+    //                 <p>${item.title} </p>         
+    //             `
+    // })
     badge.style.display = "block"
     badge.innerHTML = addedItem.length;
 } 
@@ -169,24 +169,28 @@ function addedToCart() {
         item.addEventListener('click', ()=>{
             if (localStorage.getItem ("register-username")) {
 
-                let items = allItems.find(item => item.id === products[i].id)
-                if(items){
-                    products[i].qty += 1
-                } else{
-                    allItems.push(products[i])
-                }
+                // let items = allItems.find(item => item.id === products[i].id)
+                // if(items){
+                    // products[i].qty += 1
+                // } else{
+                    // allItems.push(products[i])
+                // }
                 
-                cartItemsDiv.innerHTML = ""
-                allItems.forEach((prod)=>{
-                    cartItemsDiv.innerHTML += `<p>${prod.title}>${prod.qty}</span></p>`
-                })
+                // cartItemsDiv.innerHTML = ""
+                // allItems.forEach((prod)=>{
+                    // cartItemsDiv.innerHTML += `<p>${uniqueProducts[i].title}</p>`
+                // })
                 
                 
                 addedItem = [...addedItem,products[i]]
 
                 let uniqueProducts = getUniqueArr(addedItem,"id")
-                localStorage.setItem('productsInCart',JSON.stringify(uniqueProducts)) 
+                localStorage.setItem('productsInCart',JSON.stringify(uniqueProducts))
 
+                cartItemsDiv.innerHTML = ""
+                uniqueProducts.forEach(prod => { 
+                    cartItemsDiv.innerHTML += `<p>${prod.title}</p>`
+                })
                 const cartItemsLength = document.querySelectorAll('.cart-items-div p')
                 badge.style.display = "block"
                 badge.innerHTML = cartItemsLength.length
@@ -211,9 +215,15 @@ function getUniqueArr(myArr,filterType) {
 
 // view products in cart menu
 function openCartMenu() {
-    if (cartItemsDiv.innerHTML != "" ) {
-        cartItems.classList.toggle('active-shopping-cart')
-    }
+    let allAddedItems = JSON.parse(localStorage.getItem('productsInCart'))
+    cartItemsDiv.innerHTML = ""
+    allAddedItems.forEach(prod => { 
+        cartItemsDiv.innerHTML += `<p>${prod.title}</p>`
+    })
+        if (cartItemsDiv.innerHTML != "" ) {
+            cartItems.classList.toggle('active-shopping-cart')
+        }
+    
 }
 shoppingCart.addEventListener('click', openCartMenu)
 
@@ -269,6 +279,9 @@ likesBtn.forEach((likeBtn,i) =>{
 const favorites = document.querySelector(".favorite-products")
 
 favorites.addEventListener('click', ()=>{
+    // get liked products from localStorage
+    favoriteItems = JSON.parse(localStorage.getItem('favoriteProducts'))
+
     if(favoriteItems.length != 0){
         // create a popup
         let overlay = document.createElement('div')
@@ -282,7 +295,6 @@ favorites.addEventListener('click', ()=>{
 
         function drawFavoriteProducts(favorites) {
             let drawFavoriteProducts = favorites.map(favItem => {
-                // console.log(favItem);
                 return `
                     <i class="fa-sharp fa-solid fa-circle-xmark closeBtn"></i>
                     <div class="favorite-card">   
@@ -312,9 +324,9 @@ favorites.addEventListener('click', ()=>{
         })
     }
 })
+
 // close popup
 document.addEventListener('click', function(e){
-    // console.log(e.target.className == "fa-sharp fa-solid fa-circle-xmark closeBtn");
     if (e.target.className == "fa-sharp fa-solid fa-circle-xmark closeBtn") {
         e.target.parentNode.remove()
         document.querySelector('.popup-overlay').remove()
