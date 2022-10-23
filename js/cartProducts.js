@@ -22,7 +22,7 @@ function removeObjectWithId(arr, id) {
                     </div>
                     <div class="product-details">
                         <h2>${product.title}</h2>
-                        <h2>${product.price} $</h2>
+                        <h2 class="init-price">${product.price} $</h2>
                     </div>
                     <div class="quantity">
                         <i class="fa-sharp fa-solid fa-square-plus"></i>
@@ -75,3 +75,60 @@ function addEventListenerByClass(className, event, fn) {
 }
 addEventListenerByClass('remove-to-cart', 'click', remove);
 
+// increase and decrease the quantity
+let minus = Array.from(document.querySelectorAll('.fa-square-minus'))
+let plus = Array.from(document.querySelectorAll('.fa-square-plus'))
+let qty = Array.from(document.querySelectorAll('.quantity h3'))
+let initPrice = Array.from(document.querySelectorAll('.init-price'))
+let price = Array.from(document.querySelectorAll('.product-price h2'))
+
+// get the initial price of all products
+let total = document.querySelector('.global-price')
+let totalPrice = []
+price.forEach((e)=>{
+    totalPrice.push(parseInt(e.innerHTML))
+})
+total.innerHTML = `<h2>${sumArray(totalPrice)} $</h2>`
+
+// increase the quantity
+minus.forEach((el,i) =>{
+    el.addEventListener('click', ()=>{
+        let q = parseInt(qty[i].innerHTML)
+        if (q != 0) {
+            q --
+            qty[i].innerHTML = q
+            price[i].innerHTML = `<h3>${parseInt(initPrice[i].innerHTML) * q} $</h3>`
+            myArray(totalPrice,i)
+            sumArray(totalPrice)
+            total.innerHTML = `<h2>${sumArray(totalPrice)} $</h2>`
+        }  
+    })
+})
+
+// decrease the quantity
+plus.forEach((el,i) =>{
+    el.addEventListener('click', ()=>{
+        let q = parseInt(qty[i].innerHTML)
+        q ++ 
+        qty[i].innerHTML = q
+        price[i].innerHTML = `<h3>${parseInt(initPrice[i].innerHTML) * q} $</h3>`
+        myArray(totalPrice,i)
+        sumArray(totalPrice)
+        total.innerHTML = `<h2>${sumArray(totalPrice)} $</h2>`
+    })
+})
+
+function myArray(arr,param) {
+    let x =parseInt(price[param].innerText)
+        const index = price.indexOf(price[param])
+        arr.splice(index, 1, x)
+}
+
+// get the sum of products's price
+function sumArray(array) {
+    let sum = 0;
+    array.forEach(item => {
+      sum += item;
+    });
+    return sum;
+  }

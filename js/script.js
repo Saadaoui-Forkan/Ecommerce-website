@@ -292,7 +292,6 @@ favorites.addEventListener('click', ()=>{
         let favoriteWrapper = document.createElement('div')
         favoriteWrapper.setAttribute("class", "favorite-wrapper")
         overlay.appendChild(favoriteWrapper)
-
         function drawFavoriteProducts(favorites) {
             let drawFavoriteProducts = favorites.map(favItem => {
                 return `
@@ -309,20 +308,34 @@ favorites.addEventListener('click', ()=>{
                 `
             })
             favoriteWrapper.innerHTML = drawFavoriteProducts.join("")
+            abilityToDislike()
         }
         drawFavoriteProducts(favoriteItems)
 
         // remove disliked products
-        let disliked = document.querySelectorAll('.dislike')
-        disliked.forEach(item =>{
-            let dislikeId = item.getAttribute("data-click")
-            item.addEventListener('click', ()=>{
-                favoriteItems = favoriteItems.filter((data) => data.id != dislikeId)
-                localStorage.setItem("favoriteProducts", JSON.stringify(favoriteItems))
-                drawFavoriteProducts(favoriteItems)
+        function abilityToDislike() {
+            if (favoriteItems.length != 0) {
+                let disliked = document.querySelectorAll('.dislike')
+                disliked.forEach(item =>{
+                let dislikeId = item.getAttribute("data-click")
+                item.addEventListener('click', ()=>{
+                
+                    favoriteItems = favoriteItems.filter((data) => data.id != dislikeId)
+                    localStorage.setItem("favoriteProducts", JSON.stringify(favoriteItems))
+                    drawFavoriteProducts(favoriteItems)
+                
+                })
             })
-        })
-    }
+            } else {
+                favoriteWrapper.innerHTML= `
+                <i class="fa-sharp fa-solid fa-circle-xmark closeBtn"></i>
+                <h2 class="no-favorites"> No Favorite Products !!</h2>
+                `
+            }
+            
+        }
+        
+    } 
 })
 
 // close popup
@@ -332,3 +345,4 @@ document.addEventListener('click', function(e){
         document.querySelector('.popup-overlay').remove()
     }
 })
+

@@ -23,7 +23,7 @@ header{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 35px;
+    height: 40px;
     position: fixed;
     top: 0;
     left: 0;
@@ -48,7 +48,7 @@ header{
     font-family: 'Roboto', sans-serif;
     text-decoration: none;
     cursor: pointer;
-    font-size: 12px;
+    font-size: 15px;
 }
 .userProfile{
     display: none;
@@ -326,4 +326,12 @@ i.fa-sharp.fa-solid.fa-circle-xmark {
     top: -17px;
     color: #8758FF;
     cursor: pointer;
+}
+h2.no-favorites {
+    margin: 30px auto;
+    font-family: monospace;
+    letter-spacing: 1px;
+    color: #8758FF;
+    text-shadow: 2px 2px 3px #5CB8E4;
+    font-size: 30px;
 }

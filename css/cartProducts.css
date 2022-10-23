@@ -79,9 +79,10 @@ img {
 }
 .global-price {
     float: right;
-    margin-right: 60px;
+    margin-right: 80px;
     margin-top: 20px;
-    font-size: 15px;
+    font-size: 17px;
+    color: #5719f5;
 }
 h2.no-items {
     text-align: center;
