@@ -19,7 +19,7 @@
     width: 70%;
     align-items: center;
     justify-content: center;
-    margin: 10% auto;
+    margin: 70px auto;
     background-color: #F2F2F2;
     border: 2px solid #F2F2F2;
     border-radius: 5px;
@@ -37,7 +37,7 @@
     justify-content: center;
 }
 input {
-    margin: 10px;
+    margin: 22px;
     width: 350px;
     height: 35px;
     padding-left: 10px;
@@ -57,7 +57,7 @@ input:focus{
     border: none;
     border-bottom: 2px solid #8758FF;
 }
-input[type="button"]{
+input[type="submit"]{
     border: none;
     background-color: #8758FF;
     border-radius: 5px;
@@ -65,4 +65,26 @@ input[type="button"]{
     color: #F2F2F2;
     font-family: 'Nunito', sans-serif;
     font-weight: bold;
+}
+.form-control.error input{
+    border-color: red;
+    /* border-radius: 5px; */
+}
+.form-control.success input{
+    border-color: green;
+    /* border-radius: 5px; */
+}
+.form-control{
+    position: relative;
+}
+.form-control small{
+    position: absolute;
+    left: 25px;
+    bottom: 0;
+    color: red;
+    visibility: hidden;
+    font-family: 'Roboto', sans-serif;
+}
+.form-control.error small{
+    visibility: visible;
 }
