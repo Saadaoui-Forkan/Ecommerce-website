@@ -88,3 +88,12 @@ input[type="submit"]{
 .form-control.error small{
     visibility: visible;
 }
+
+@media (max-width: 575px){
+    .logInForm {
+        width: 90%;
+    }
+    input {
+        width: 300px;
+    }
+}

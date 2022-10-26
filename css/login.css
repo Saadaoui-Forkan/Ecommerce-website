@@ -73,3 +73,11 @@ input:focus{
 .error-input{
     border-color: red;
 }
+@media (max-width: 575px){
+    .logInForm {
+        width: 90%;
+    }
+    input {
+        width: 300px;
+    }
+}

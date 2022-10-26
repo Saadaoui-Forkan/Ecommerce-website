@@ -9,9 +9,14 @@ let getPassword = localStorage.getItem("register-password")
 form.addEventListener('submit', function(e) {
     e.preventDefault()
     if (getUser.trim() !== loginUsername.value.trim() || getPassword !== loginPassword.value) {
-        showErrorMsg.setAttribute("class","show-error")
-        document.querySelector('.login-username').classList.add("error-input")
-        document.querySelector('.login-password').classList.add("error-input")
+        // showErrorMsg.setAttribute("class","show-error")
+        // document.querySelector('.login-username').classList.add("error-input")
+        // document.querySelector('.login-password').classList.add("error-input")
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Username or password not matching!!',
+          })
     } else {
         if(getUser && 
             getUser.trim() === loginUsername.value.trim() && 
