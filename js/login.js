@@ -6,28 +6,12 @@ let showErrorMsg  = document.querySelector('.error-message')
 let getUser = localStorage.getItem("register-username")
 let getPassword = localStorage.getItem("register-password")
 
-// loginBtn.addEventListener('click', login)
-
-// function login(e){
-//     e.preventDefault()
-//     if(loginUsername.value === "" || loginPassword.value === ""){
-//         alert('data not found')
-//     }else{
-//         if(getUser && 
-//             getUser.trim() === loginUsername.value.trim() && 
-//             getPassword && 
-//             getPassword === loginPassword.value) 
-//             {
-//                 window.location = "../index.html"
-//         }
-//     }
-// }
-// 
-
 form.addEventListener('submit', function(e) {
     e.preventDefault()
     if (getUser.trim() !== loginUsername.value.trim() || getPassword !== loginPassword.value) {
         showErrorMsg.setAttribute("class","show-error")
+        document.querySelector('.login-username').classList.add("error-input")
+        document.querySelector('.login-password').classList.add("error-input")
     } else {
         if(getUser && 
             getUser.trim() === loginUsername.value.trim() && 

@@ -70,3 +70,6 @@ input:focus{
     visibility: visible;
     font-family: 'Nunito';
 }
+.error-input{
+    border-color: red;
+}
