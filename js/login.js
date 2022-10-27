@@ -25,10 +25,5 @@ form.addEventListener('submit', function(e) {
             {
                 window.location = "../index.html"
         }
-        setTimeout(()=>{
-            window.location = "./login.html"
-        }, 300)
     }
-    
-
 })
