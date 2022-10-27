@@ -346,3 +346,8 @@ document.addEventListener('click', function(e){
     }
 })
 
+// add a loader
+let loader = document.getElementById("loader")
+window.addEventListener('load', ()=> {
+    loader.style.display = 'none'
+})
